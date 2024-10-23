@@ -1,42 +1,15 @@
-<div class="layout-topbar">
-  <div class="layout-topbar-inner">
-    <div class="layout-topbar-logo-container">
-      <span>LOGO</span>
+<!-- <app-topbar /> -->
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-topbar />
+  <div
+    class="layout-mask"
+    [ngClass]="{ 'layout-mask-active': isMenuActive }"
+    (click)="hideMenu()"
+  ></div>
+  <div class="layout-content">
+    <app-menu />
+    <div class="layout-content-slot">
+      <router-outlet></router-outlet>
     </div>
-
-    <ul class="topbar-items">
-      <li>
-        <button type="button" class="topbar-item" (click)="toggleDarkMode()">
-          <i
-            class="pi"
-            [ngClass]="{ 'pi-moon': isDarkMode, 'pi-sun': !isDarkMode }"
-          ></i>
-        </button>
-      </li>
-      <li class="relative">
-        <button
-          type="button"
-          class="topbar-item config-item"
-          pStyleClass="@next"
-          enterFromClass="hidden"
-          enterActiveClass="animate-scalein"
-          leaveToClass="hidden"
-          leaveActiveClass="animate-fadeout"
-        >
-          <i class="pi pi-palette"></i>
-        </button>
-        <!-- <app-configurator/> -->
-      </li>
-    </ul>
   </div>
 </div>
-<div class="landing" [ngClass]="'layout-dark'">
-  <div class="card flex justify-center">
-    <p-button
-      label="Check"
-      icon="pi pi-check"
-      (onClick)="toggleDarkMode()"
-    ></p-button>
-  </div>
-</div>
-<router-outlet />

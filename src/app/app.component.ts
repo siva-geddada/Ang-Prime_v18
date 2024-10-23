@@ -1,56 +1,47 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { PrimeNGConfig } from 'primeng/api';
-import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
+import { PrimeNGConfig } from 'primeng/api';
+import { NgClass } from '@angular/common';
 import Noir from './themes/app-theme';
 import { AppConfigService } from './config/appconfigservice';
-import { NgClass } from '@angular/common';
+import { TopbarComponent } from './layout/topbar/topbar.component';
+import { DomHandler } from 'primeng/dom';
+import { AppMenuComponent } from './layout/menu/app.menu.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ButtonModule, InputTextModule, FormsModule, NgClass],
+  imports: [RouterOutlet, FormsModule, NgClass, TopbarComponent, AppMenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Ang_v18';
-  value: any;
 
-  config: PrimeNGConfig = inject(PrimeNGConfig);
-  app_config: AppConfigService = inject(AppConfigService);
+  prime_config: PrimeNGConfig = inject(PrimeNGConfig);
+  app_config = inject(AppConfigService);
 
   constructor() {
-    this.config.theme.set(Noir);
-  }
-  ngOnInit() {
-    this.config.ripple.set(true);
+    this.prime_config.theme.set(Noir);
   }
 
-  toggleDarkMode() {
-    this.app_config.appState.update((state) => {
-        const newState = { ...state, darkTheme: !state.darkTheme };
-        console.log('Dark mode state:', newState.darkTheme);
-        return newState;
-    });
-}
+  get isNewsActive(): boolean {
+    return this.app_config.state.newsActive ?? false;
+  }
 
-  get landingClass() {
+  get containerClass() {
     return {
-        'layout-dark': this.isDarkMode,
-        'layout-light': !this.isDarkMode,
-        'layout-news-active': this.isNewsActive,
+      'layout-news-active': this.isNewsActive,
+      // 'p-ripple-disabled': this.isRippleDisabled,
     };
-}
+  }
 
-get isDarkMode() {
-    return this.app_config.appState().darkTheme;
+  get isMenuActive(): boolean {
+    return this.app_config.state.menuActive ?? false;
+  }
+  hideMenu() {
+    this.app_config.hideMenu();
+    DomHandler.unblockBodyScroll('blocked-scroll');
 }
-
-get isNewsActive() {
-    return this.app_config.state.newsActive;
-}
-
 }
