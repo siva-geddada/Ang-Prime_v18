@@ -5,7 +5,7 @@
 @import './_core';
 @import './_glow';
 @import './_topbar';
-// @import './_sidebar';
+@import './_sidebar';
 @import './_content';
 @import './_news';
 // @import './_footer';
@@ -13,6 +13,6 @@
 // @import './_code';
 // @import './_doc';
 // @import './_docsearch';
-// @import './_responsive';
+@import './_responsive';
 @import './landing/_landing';
 // @import './templates';
