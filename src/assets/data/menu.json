@@ -1,28 +1,19 @@
 {
-    "data": [
+  "data": [
+    {
+      "name": "Getting Started",
+      "icon": "pi pi-home",
+      "children": [
         {
-            "name": "Getting Started",
-            "icon": "pi pi-home",
-            "children": [
-                {
-                    "name": "Installation",
-                    "routerLink": "/installation"
-                },
-                {
-                    "name": "Configuration",
-                    "routerLink": "/configuration"
-                },
-                {
-                    "name": "Playground",
-                    "routerLink": "/playground"
-                }
-            ]
-        },
-        {
-            "name": "Theming",
-            "icon": "pi pi-palette",
-            "routerLink": "/theming"
+          "name": "Installation",
+          "routerLink": "/get-started"
         }
-    
-    ]
+      ]
+    },
+    {
+      "name": "Forms",
+      "icon": "pi pi-file",
+      "routerLink": "/forms"
+    }
+  ]
 }
